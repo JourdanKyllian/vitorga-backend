@@ -1,2 +1,14 @@
-# vitorga-backend
-Backend du projet Vitorga, une application de gestion et d’organisation pour les exploitations viticoles. Développé avec NestJS, il gère la logique métier, les données des parcelles, des interventions, des machines et des utilisateurs. Il expose une API REST destinée aux applications web et mobiles Vitorga.
+# 🍇 Vitorga - Backend
+
+Backend officiel du projet **Vitorga**, une solution numérique visant à faciliter la gestion des travaux, du matériel et des documents au sein des exploitations viticoles.
+Il expose une API REST destinée aux applications web et mobiles Vitorga.
+
+## 🛠️ Stack technique
+- **Framework :** NestJS (Node.js)
+- **Base de données :** PostgreSQL
+- **ORM :** TypeORM
+- **Authentification :** JWT
+- **API :** REST
+- **Outils :** Docker (documentation API)
+
+## 📁 Structure du projet
