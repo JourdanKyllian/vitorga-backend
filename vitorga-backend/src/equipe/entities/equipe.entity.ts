@@ -1,3 +1,4 @@
+import { Intervention } from "src/intervention/entities/intervention.entity";
 import { UsersEquipe } from "src/users_equipe/entities/users_equipe.entity";
 import { 
     Entity,
@@ -6,7 +7,8 @@ import {
     CreateDateColumn,
     DeleteDateColumn,
     UpdateDateColumn,
-    OneToMany
+    OneToMany,
+    ManyToOne
 } from "typeorm";
 
 @Entity('equipe')
@@ -40,4 +42,7 @@ export class Equipe {
 
     @OneToMany(() => UsersEquipe, (usersEquipe) => usersEquipe.user)
     usersEquipes: UsersEquipe[];
+
+    @ManyToOne(() => Intervention, (intervention) => intervention.equipe)
+    interventions: Intervention;
 }

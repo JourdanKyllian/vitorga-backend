@@ -1,5 +1,4 @@
 import { Entreprise } from 'src/entreprise/entities/entreprise.entity';
-import { Equipe } from 'src/equipe/entities/equipe.entity';
 import { Role } from 'src/role/entities/role.entity';
 import { UsersEquipe } from 'src/users_equipe/entities/users_equipe.entity';
 import {
@@ -11,8 +10,6 @@ import {
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
-  ManyToMany,
-  JoinTable,
   OneToMany
 } from 'typeorm';
 
@@ -30,7 +27,7 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column({ select: false }) // "select: false" cache le mot de passe par défaut dans les requêtes
+  @Column({ select: false })
   password: string;
 
   @Column({ nullable: true })
