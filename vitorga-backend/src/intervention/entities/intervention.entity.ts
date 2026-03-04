@@ -1,3 +1,4 @@
+import { Campagne } from "src/campagne/entities/campagne.entity";
 import { Equipe } from "src/equipe/entities/equipe.entity";
 import { 
     Column,
@@ -37,4 +38,7 @@ export class Intervention {
 
     @OneToMany(() => Equipe, (equipe) => equipe.interventions) 
     equipe: Equipe[];
+
+    @OneToMany(() => Campagne, (campagne) => campagne.interventions) 
+    campagne: Campagne[];
 }
