@@ -1,10 +1,19 @@
+import { Entreprise } from 'src/entreprise/entities/entreprise.entity';
+import { Equipe } from 'src/equipe/entities/equipe.entity';
+import { Role } from 'src/role/entities/role.entity';
+import { UsersEquipe } from 'src/users_equipe/entities/users_equipe.entity';
 import {
   Entity,
   PrimaryGeneratedColumn, 
-  Column, 
+  Column,
   CreateDateColumn, 
   UpdateDateColumn, 
-  DeleteDateColumn
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
+  OneToMany
 } from 'typeorm';
 
 @Entity('users')
@@ -42,14 +51,18 @@ export class User {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @DeleteDateColumn() // Gère le "soft delete" automatiquement
+  @DeleteDateColumn()
   deleted_at: Date;
 
-  // Relation avec Role (Foreign Key)
-  @Column()
-  role_id: number;
+  @ManyToOne(() => Role, (role) => role.users)
+  @JoinColumn({ name: 'role_id' })
+  role: Role;
 
-  // Relation avec Entreprise (Foreign Key)
+  @ManyToOne(() => Entreprise, (entreprise) => entreprise.users)
+  @JoinColumn({ name: 'entreprise_id' })
   @Column()
-  entreprise_id: number;
+  entreprise: Entreprise;
+
+  @OneToMany(() => UsersEquipe, (usersEquipe) => usersEquipe.user)
+  usersEquipes: UsersEquipe[];
 }
