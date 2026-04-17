@@ -1,0 +1,15 @@
+node_modules
+dist
+.git
+.github
+coverage
+test
+*.md
+.env
+.env.*
+!.env.example
+*.sqlite
+data/
+terraform/
+ansible/
+monitoring/
