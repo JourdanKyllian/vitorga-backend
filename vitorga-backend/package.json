@@ -6,9 +6,13 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "test": "jest --testPathPattern=test/unit --coverage",
-    "test:e2e": "jest --testPathPattern=test/integration --testTimeout=30000",
-    "test:cov": "jest --coverage"
+    "test": "jest --testPathPatterns=test/unit",
+    "test:e2e": "jest --testPathPatterns=test/integration --testTimeout=30000",
+    "lint": "eslint \"{src,test}/**/*.ts\"",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "nest build",
+    "start:dev": "nest start --watch"
   },
   "jest": {
     "moduleFileExtensions": ["js", "json", "ts"],
