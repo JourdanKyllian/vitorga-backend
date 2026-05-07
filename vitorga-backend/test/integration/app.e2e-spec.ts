@@ -13,7 +13,9 @@ describe('Vitorga API (integration)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, transform: true }),
+    );
     await app.init();
   });
 
@@ -46,13 +48,21 @@ describe('Vitorga API (integration)', () => {
     });
 
     it('should return 409 when email already exists', async () => {
-      await request(app.getHttpServer())
-        .post('/auth/register')
-        .send({ firstname: 'A', lastname: 'B', email: 'double@test.fr', password: '123456' });
+      await request(app.getHttpServer()).post('/auth/register').send({
+        firstname: 'A',
+        lastname: 'B',
+        email: 'double@test.fr',
+        password: '123456',
+      });
 
       const res = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ firstname: 'A', lastname: 'B', email: 'double@test.fr', password: '123456' });
+        .send({
+          firstname: 'A',
+          lastname: 'B',
+          email: 'double@test.fr',
+          password: '123456',
+        });
 
       expect(res.status).toBe(409);
     });
@@ -60,7 +70,12 @@ describe('Vitorga API (integration)', () => {
     it('should return 400 when email is invalid', async () => {
       const res = await request(app.getHttpServer())
         .post('/auth/register')
-        .send({ firstname: 'A', lastname: 'B', email: 'pasunemail', password: '123456' });
+        .send({
+          firstname: 'A',
+          lastname: 'B',
+          email: 'pasunemail',
+          password: '123456',
+        });
 
       expect(res.status).toBe(400);
     });
@@ -68,14 +83,12 @@ describe('Vitorga API (integration)', () => {
 
   describe('POST /auth/login', () => {
     beforeAll(async () => {
-      await request(app.getHttpServer())
-        .post('/auth/register')
-        .send({
-          firstname: 'Marie',
-          lastname: 'Martin',
-          email: 'marie@vitorga.fr',
-          password: 'password123',
-        });
+      await request(app.getHttpServer()).post('/auth/register').send({
+        firstname: 'Marie',
+        lastname: 'Martin',
+        email: 'marie@vitorga.fr',
+        password: 'password123',
+      });
 
       const res = await request(app.getHttpServer())
         .post('/auth/login')

@@ -20,7 +20,25 @@ import { VigneModule } from './vigne/vigne.module';
 import { TypeProductionModule } from './type_production/type_production.module';
 
 @Module({
-  imports: [UsersModule, EquipeModule, UsersEquipeModule, RoleModule, CampagneModule, InterventionModule, InterventionRessourceModule, RessourceModule, EntrepriseModule, ParcelleModule, BatimentModule, BatimentRessourceModule, EntrepriseParcelleModule, NormesModule, AppellationModule, VigneModule, TypeProductionModule],
+  imports: [
+    UsersModule,
+    EquipeModule,
+    UsersEquipeModule,
+    RoleModule,
+    CampagneModule,
+    InterventionModule,
+    InterventionRessourceModule,
+    RessourceModule,
+    EntrepriseModule,
+    ParcelleModule,
+    BatimentModule,
+    BatimentRessourceModule,
+    EntrepriseParcelleModule,
+    NormesModule,
+    AppellationModule,
+    VigneModule,
+    TypeProductionModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

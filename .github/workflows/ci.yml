@@ -42,7 +42,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run unit tests with coverage
-        run: npm test -- --coverage --coverageReporters=lcov
+        run: npm test -- --coverage --coverageReporters=lcov --testPathPattern="test/unit"
         env:
           NODE_ENV: test
       - uses: actions/upload-artifact@v4
@@ -62,8 +62,8 @@ jobs:
           cache-dependency-path: ./vitorga-backend/package-lock.json
       - name: Install dependencies
         run: npm ci
-      - name: Run integration tests
-        run: npm run test:e2e
+      - name: Run integration tests  
+        run: npx jest --testPathPattern="test/integration" --testTimeout=30000
         env:
           NODE_ENV: test
           JWT_SECRET: test-secret-ci

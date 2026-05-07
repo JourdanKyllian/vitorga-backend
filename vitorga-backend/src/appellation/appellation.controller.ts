@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { AppellationService } from './appellation.service';
 import { CreateAppellationDto } from './dto/create-appellation.dto';
 import { UpdateAppellationDto } from './dto/update-appellation.dto';
@@ -23,7 +31,10 @@ export class AppellationController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAppellationDto: UpdateAppellationDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateAppellationDto: UpdateAppellationDto,
+  ) {
     return this.appellationService.update(+id, updateAppellationDto);
   }
 

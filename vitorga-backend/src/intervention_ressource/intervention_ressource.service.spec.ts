@@ -9,7 +9,9 @@ describe('InterventionRessourceService', () => {
       providers: [InterventionRessourceService],
     }).compile();
 
-    service = module.get<InterventionRessourceService>(InterventionRessourceService);
+    service = module.get<InterventionRessourceService>(
+      InterventionRessourceService,
+    );
   });
 
   it('should be defined', () => {

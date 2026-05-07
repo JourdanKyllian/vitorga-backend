@@ -11,7 +11,9 @@ describe('EntrepriseParcelleController', () => {
       providers: [EntrepriseParcelleService],
     }).compile();
 
-    controller = module.get<EntrepriseParcelleController>(EntrepriseParcelleController);
+    controller = module.get<EntrepriseParcelleController>(
+      EntrepriseParcelleController,
+    );
   });
 
   it('should be defined', () => {

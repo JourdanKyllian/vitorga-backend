@@ -11,7 +11,9 @@ describe('InterventionRessourceController', () => {
       providers: [InterventionRessourceService],
     }).compile();
 
-    controller = module.get<InterventionRessourceController>(InterventionRessourceController);
+    controller = module.get<InterventionRessourceController>(
+      InterventionRessourceController,
+    );
   });
 
   it('should be defined', () => {

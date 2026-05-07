@@ -1,11 +1,5 @@
 // src/users_equipe/entities/users_equipe.entity.ts
-import { 
-    Entity,
-    Column,
-    ManyToOne,
-    JoinColumn,
-    PrimaryColumn
-} from 'typeorm';
+import { Entity, Column, ManyToOne, JoinColumn, PrimaryColumn } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { Equipe } from '../../equipe/entities/equipe.entity';
 

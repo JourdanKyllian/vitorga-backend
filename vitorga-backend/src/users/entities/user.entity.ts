@@ -4,16 +4,16 @@ import { Role } from 'src/role/entities/role.entity';
 import { UsersEquipe } from 'src/users_equipe/entities/users_equipe.entity';
 import {
   Entity,
-  PrimaryGeneratedColumn, 
+  PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn, 
-  UpdateDateColumn, 
+  CreateDateColumn,
+  UpdateDateColumn,
   DeleteDateColumn,
   ManyToOne,
   JoinColumn,
   ManyToMany,
   JoinTable,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 
 @Entity('users')

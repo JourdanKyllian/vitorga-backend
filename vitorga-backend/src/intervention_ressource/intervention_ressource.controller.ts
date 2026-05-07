@@ -1,15 +1,29 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { InterventionRessourceService } from './intervention_ressource.service';
 import { CreateInterventionRessourceDto } from './dto/create-intervention_ressource.dto';
 import { UpdateInterventionRessourceDto } from './dto/update-intervention_ressource.dto';
 
 @Controller('intervention-ressource')
 export class InterventionRessourceController {
-  constructor(private readonly interventionRessourceService: InterventionRessourceService) {}
+  constructor(
+    private readonly interventionRessourceService: InterventionRessourceService,
+  ) {}
 
   @Post()
-  create(@Body() createInterventionRessourceDto: CreateInterventionRessourceDto) {
-    return this.interventionRessourceService.create(createInterventionRessourceDto);
+  create(
+    @Body() createInterventionRessourceDto: CreateInterventionRessourceDto,
+  ) {
+    return this.interventionRessourceService.create(
+      createInterventionRessourceDto,
+    );
   }
 
   @Get()
@@ -23,8 +37,14 @@ export class InterventionRessourceController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInterventionRessourceDto: UpdateInterventionRessourceDto) {
-    return this.interventionRessourceService.update(+id, updateInterventionRessourceDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateInterventionRessourceDto: UpdateInterventionRessourceDto,
+  ) {
+    return this.interventionRessourceService.update(
+      +id,
+      updateInterventionRessourceDto,
+    );
   }
 
   @Delete(':id')

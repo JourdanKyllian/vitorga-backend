@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { NormesService } from './normes.service';
 import { CreateNormeDto } from './dto/create-norme.dto';
 import { UpdateNormeDto } from './dto/update-norme.dto';

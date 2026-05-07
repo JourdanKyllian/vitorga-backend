@@ -16,7 +16,10 @@ export class InterventionRessourceService {
     return `This action returns a #${id} interventionRessource`;
   }
 
-  update(id: number, updateInterventionRessourceDto: UpdateInterventionRessourceDto) {
+  update(
+    id: number,
+    updateInterventionRessourceDto: UpdateInterventionRessourceDto,
+  ) {
     return `This action updates a #${id} interventionRessource`;
   }
 

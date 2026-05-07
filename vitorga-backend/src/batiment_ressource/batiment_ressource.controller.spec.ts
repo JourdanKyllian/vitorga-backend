@@ -11,7 +11,9 @@ describe('BatimentRessourceController', () => {
       providers: [BatimentRessourceService],
     }).compile();
 
-    controller = module.get<BatimentRessourceController>(BatimentRessourceController);
+    controller = module.get<BatimentRessourceController>(
+      BatimentRessourceController,
+    );
   });
 
   it('should be defined', () => {

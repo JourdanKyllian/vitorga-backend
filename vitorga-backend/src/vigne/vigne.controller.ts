@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { VigneService } from './vigne.service';
 import { CreateVigneDto } from './dto/create-vigne.dto';
 import { UpdateVigneDto } from './dto/update-vigne.dto';
