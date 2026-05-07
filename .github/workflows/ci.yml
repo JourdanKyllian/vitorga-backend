@@ -12,32 +12,20 @@ defaults:
 
 jobs:
 
-  # ===== JOBS PARALLÈLES =====
-
   lint:
     name: Lint & Format
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
+          cache-dependency-path: ./vitorga-backend/package-lock.json
       - name: Install dependencies
         run: npm ci
-        working-directory: ./vitorga-backend
-        
-      - name: Run build
-        run: npm run build
-
-      - name: Run TypeScript type checking
-        run: npm run type-check
-
       - name: Run ESLint
         run: npm run lint
-
       - name: Check Prettier formatting
         run: npx prettier --check "src/**/*.ts"
 
@@ -46,40 +34,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
+          cache-dependency-path: ./vitorga-backend/package-lock.json
       - name: Install dependencies
         run: npm ci
-
       - name: Run unit tests with coverage
         run: npm test -- --coverage --coverageReporters=lcov --testPathPattern=test/unit
         env:
           NODE_ENV: test
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: coverage/lcov.info
+          path: ./vitorga-backend/coverage/lcov.info
 
   integration-tests:
     name: Tests d'intégration
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
+          cache-dependency-path: ./vitorga-backend/package-lock.json
       - name: Install dependencies
         run: npm ci
-
       - name: Run integration tests
         run: npm run test:e2e
         env:
@@ -94,14 +76,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: actions/download-artifact@v4
         with:
           name: coverage-report
           path: coverage
-
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: ./vitorga-backend
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -111,19 +93,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
+          cache-dependency-path: ./vitorga-backend/package-lock.json
       - name: Install dependencies
         run: npm ci
-
       - name: npm audit
         run: npm audit --audit-level=critical
-
-  # ===== JOBS SÉQUENTIELS =====
 
   build:
     name: Build application
@@ -131,22 +109,19 @@ jobs:
     needs: [lint, unit-tests, integration-tests]
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
-
+          cache-dependency-path: ./vitorga-backend/package-lock.json
       - name: Install dependencies
         run: npm ci
-
       - name: Build
         run: npm run build
-
       - uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/
+          path: ./vitorga-backend/dist/
 
   docker-build:
     name: Build image Docker
@@ -154,20 +129,17 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-
       - name: Build image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./vitorga-backend
           push: false
           tags: vitorga-api:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           outputs: type=docker,dest=/tmp/image.tar
-
       - uses: actions/upload-artifact@v4
         with:
           name: docker-image
@@ -179,15 +151,12 @@ jobs:
     needs: [docker-build]
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/download-artifact@v4
         with:
           name: docker-image
           path: /tmp
-
       - name: Load image
         run: docker load --input /tmp/image.tar
-
       - name: Run Trivy
         uses: aquasecurity/trivy-action@master
         with:
